@@ -10,13 +10,13 @@ import { PersonaService } from '../Servicios/PersonaService.service';
 })
 export class FormularioComponent implements OnInit {
   //@Output() personaCreada = new EventEmitter<Persona>();
-  @ViewChild('nombreInput') nombreInput: ElementRef;
-  @ViewChild('apellidoInput') apellidoInput: ElementRef;
-  // nombreInput: string;
-  // apellidoInput: string;
+  
+  nombreInput: string;
+  apellidoInput: string;
 
   constructor( private loggingService: LoggingService,
-                private personaService: PersonaService ) { 
+                private personaService: PersonaService ) 
+                { 
                   this.personaService.saludar.subscribe(
                     (indice: number) => alert("El indice es "+ indice)
                   );
@@ -27,9 +27,8 @@ export class FormularioComponent implements OnInit {
   }
 
   onAgregarPersona(){
-    let persona = new Persona(this.nombreInput.nativeElement.value, this.apellidoInput.nativeElement.value);
-    //this.loggingService.enviaMensajeConsola("Cargamos persona: "+ persona.nombre + ' '+ persona.apellido);
-    //this.personaCreada.emit(persona);
+    //let persona = new Persona(this.nombreInput.nativeElement.value, this.apellidoInput.nativeElement.value);
+    let persona = new Persona(this.nombreInput, this.apellidoInput);
     this.personaService.agregarPersona(persona);
   }
 
