@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Persona } from '../Models/persona.models';
 import { LoggingService } from '../Servicios/LoggingService.service';
 import { PersonaService } from '../Servicios/PersonaService.service';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-personas',
@@ -16,8 +17,8 @@ export class PersonasComponent implements OnInit{
   personas: Persona[] = [];
   
   constructor(
-    private loggingService: LoggingService,
-    private personaService: PersonaService 
+    private personaService: PersonaService,
+    private router: Router, 
     ){
     // setTimeout(
     //   ()=>{
@@ -41,5 +42,9 @@ export class PersonasComponent implements OnInit{
     //this.loggingService.enviaMensajeConsola("Persona cargada: "+ persona.nombre);
     //this.personas.push(persona);
     this.personaService.agregarPersona(persona);
+  }
+
+  add(){
+    this.router.navigate(['personas/agregar']);
   }
 }

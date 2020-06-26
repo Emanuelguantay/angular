@@ -15,4 +15,15 @@ export class PersonaService{
         this.logginService.enviaMensajeConsola("Peronsa agregada "+ persona.nombre);
         this.personas.push(persona);
       }
+
+      findPerson(index: number){
+        let persona: Persona = this.personas[index];
+        return persona;
+      }
+
+      editPerson(index: number, persona: Persona){
+        let personaEdit: Persona= this.personas[index];
+        personaEdit.nombre = persona.nombre;
+        personaEdit.apellido = persona.apellido;
+      }
 }
