@@ -10,6 +10,8 @@ import { PersonaService } from './Servicios/PersonaService.service';
 import { PersonaComponent } from './personas/persona/persona.component';
 import { FormularioComponent } from './personas/formulario/formulario.component';
 import { ErrorComponent } from './personas/error/error.component';
+import { DataService } from './Servicios/DataService.service';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -23,11 +25,13 @@ import { ErrorComponent } from './personas/error/error.component';
   imports: [
     BrowserModule,
     FormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule 
   ],
   providers: [
     LoggingService,
-    PersonaService
+    PersonaService,
+    DataService
   ],
   bootstrap: [AppComponent]
 })
