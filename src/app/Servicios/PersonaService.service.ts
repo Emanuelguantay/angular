@@ -26,4 +26,8 @@ export class PersonaService{
         personaEdit.nombre = persona.nombre;
         personaEdit.apellido = persona.apellido;
       }
+
+      deletedPerson(index: number){
+        this.personas.splice(index,1);
+      }
 }

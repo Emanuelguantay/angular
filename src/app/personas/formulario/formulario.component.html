@@ -9,6 +9,9 @@
         <button type="submit" style="cursor: pointer">
             +
         </button>
+        <button *ngIf="index != null" type="submit" style="cursor: pointer" class="buttonRed" (click)="deletedPerson()">
+            -
+        </button>
 </form>
 </div>
 
