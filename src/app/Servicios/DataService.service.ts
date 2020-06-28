@@ -7,6 +7,10 @@ export class DataService{
     constructor(private httpClient: HttpClient){
     }
 
+    loadPerson(){
+        return this.httpClient.get('https://people-list-3a6f4.firebaseio.com/datos.json');
+    }
+
     savePerson(personas: Persona[]){
         this.httpClient.put('https://people-list-3a6f4.firebaseio.com/datos.json',personas)
         .subscribe(

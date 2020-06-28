@@ -5,7 +5,7 @@ import { DataService } from './DataService.service';
 
 @Injectable()
 export class PersonaService{
-    personas: Persona[] = [new Persona("juan", "Quispe"), new Persona("Emanuel", "Guantay")];
+    personas: Persona[];
     saludar = new EventEmitter<number>();
 
     constructor(private logginService: LoggingService,
@@ -13,8 +13,15 @@ export class PersonaService{
       ){
     }
 
+    setPersonas(personas: Persona[]){
+      this.personas = personas;
+    }
+
     agregarPersona(persona: Persona){
         this.logginService.enviaMensajeConsola("Peronsa agregada "+ persona.nombre);
+        if (persona == null){
+          this.personas = [];
+        }
         this.personas.push(persona);
         this.dataService.savePerson(this.personas);
       }
@@ -32,5 +39,9 @@ export class PersonaService{
 
       deletedPerson(index: number){
         this.personas.splice(index,1);
+      }
+
+      loadPersonList(){
+        return this.dataService.loadPerson();
       }
 }

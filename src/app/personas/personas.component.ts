@@ -27,7 +27,14 @@ export class PersonasComponent implements OnInit{
     // 3000);
   }
   ngOnInit(): void {
-    this.personas = this.personaService.personas;
+    //this.personas = this.personaService.personas;
+    this.personaService.loadPersonList()
+    .subscribe(
+      (personas: Persona[]) =>{
+        this.personas = personas;
+        this.personaService.setPersonas(personas);
+      }
+    );
   }
 
   // onCreatePersona(){
