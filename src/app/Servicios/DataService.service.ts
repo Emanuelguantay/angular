@@ -20,4 +20,15 @@ export class DataService{
             error => console.log("Error al guardar personas: "+error)
         );
     }
+
+    editPerson(index: number, person: Persona){
+        let url: string ='https://people-list-3a6f4.firebaseio.com/datos/'+ index+'.json';
+        this.httpClient.put(url, person)
+        .subscribe(
+            response => {
+                console.log("resultado de editar Personas " + response);
+            },
+            error => console.log("Error al editar personas: "+error)
+        );
+    }
 }
