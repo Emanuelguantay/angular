@@ -1,18 +1,22 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Persona } from '../Models/persona.models';
+import { LoginService } from './loginService.service';
 
 @Injectable()
 export class DataService{
-    constructor(private httpClient: HttpClient){
+    constructor(private httpClient: HttpClient,
+                private loginService: LoginService){
     }
 
     loadPerson(){
-        return this.httpClient.get('https://people-list-3a6f4.firebaseio.com/datos.json');
+        const token = this.loginService.getIdToken();
+        return this.httpClient.get('https://people-list-3a6f4.firebaseio.com/datos.json?auth='+ token);
     }
 
     savePerson(personas: Persona[]){
-        this.httpClient.put('https://people-list-3a6f4.firebaseio.com/datos.json',personas)
+        const token = this.loginService.getIdToken();
+        this.httpClient.put('https://people-list-3a6f4.firebaseio.com/datos.json?auth='+ token,personas)
         .subscribe(
             response => {
                 console.log("resultado de guardar Personas " + response);
@@ -22,7 +26,8 @@ export class DataService{
     }
 
     editPerson(index: number, person: Persona){
-        let url: string ='https://people-list-3a6f4.firebaseio.com/datos/'+ index+'.json';
+        const token = this.loginService.getIdToken();
+        let url: string ='https://people-list-3a6f4.firebaseio.com/datos/'+ index+'.json?auth='+ token;
         this.httpClient.put(url, person)
         .subscribe(
             response => {
@@ -33,7 +38,8 @@ export class DataService{
     }
 
     deletedPerson(index:number){
-        let url: string ='https://people-list-3a6f4.firebaseio.com/datos/'+ index+'.json';
+        const token = this.loginService.getIdToken();
+        let url: string ='https://people-list-3a6f4.firebaseio.com/datos/'+ index+'.json?auth='+ token;
         this.httpClient.delete(url)
         .subscribe(
             response => {
