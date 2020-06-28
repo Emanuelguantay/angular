@@ -2,6 +2,7 @@ import { Persona } from '../Models/persona.models';
 import { LoggingService } from './LoggingService.service';
 import { Injectable, EventEmitter } from '@angular/core';
 import { DataService } from './DataService.service';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Injectable()
 export class PersonaService{
@@ -40,6 +41,15 @@ export class PersonaService{
 
       deletedPerson(index: number){
         this.personas.splice(index,1);
+        this.dataService.deletedPerson(index);
+        //TODO: Recarga de la lista modificar!!
+        this.editPersonList();
+      }
+
+      editPersonList(){
+        if (this.personas != null){
+          this.dataService.savePerson(this.personas);
+        }
       }
 
       loadPersonList(){

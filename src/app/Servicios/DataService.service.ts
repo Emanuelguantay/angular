@@ -31,4 +31,15 @@ export class DataService{
             error => console.log("Error al editar personas: "+error)
         );
     }
+
+    deletedPerson(index:number){
+        let url: string ='https://people-list-3a6f4.firebaseio.com/datos/'+ index+'.json';
+        this.httpClient.delete(url)
+        .subscribe(
+            response => {
+                console.log("resultado de eliminar Personas " + response);
+            },
+            error => console.log("Error al eliminar personas: "+error)
+        );
+    }
 }
